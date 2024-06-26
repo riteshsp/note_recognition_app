@@ -34,5 +34,12 @@ def upload_file():
         return jsonify({'error': 'Invalid file type'}), 400
 
 
+
+@app.route('/')
+def home():
+    return "Welcome to the Flask API!"
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)

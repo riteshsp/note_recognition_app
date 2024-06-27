@@ -21,20 +21,23 @@ def allowed_file(filename):
 @app.route('/api/upload/', methods=['POST'])
 @cross_origin(origin='*')
 def upload_file():
-    if 'file' not in request.files:
-        return jsonify({'error': 'No file part'}), 400
-    file = request.files['file']
-    if file.filename == '':
-        return jsonify({'error': 'No selected file'}), 400
-    if file and allowed_file(file.filename):
-        filename = file.filename
-        img_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        file.save(img_path)
-        data = reconized_image(img_path)
-        os.remove(img_path)
-        return jsonify({'data': data, 'filename': filename}), 201
-    else:
-        return jsonify({'error': 'Invalid file type'}), 400
+    try:
+        if 'file' not in request.files:
+            return jsonify({'error': 'No file part'}), 400
+        file = request.files['file']
+        if file.filename == '':
+            return jsonify({'error': 'No selected file'}), 400
+        if file and allowed_file(file.filename):
+            filename = file.filename
+            img_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            file.save(img_path)
+            data = reconized_image(img_path)
+            os.remove(img_path)
+            return jsonify({'data': data, 'filename': filename}), 201
+        else:
+            return jsonify({'error': 'Invalid file type'}), 400
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 
 

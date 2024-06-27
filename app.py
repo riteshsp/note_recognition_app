@@ -1,9 +1,11 @@
 from flask import Flask, jsonify, request
 import os
 from image_recognition import reconized_image
+from flask_cors import CORS
 
 app = Flask(__name__)
 
+CORS(app)
 
 UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}

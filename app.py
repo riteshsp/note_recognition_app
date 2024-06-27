@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
 import os
 from image_recognition import reconized_image
-from flask_cors import CORS
+from flask_cors import CORS,cross_origin
 
 app = Flask(__name__)
 
@@ -19,6 +19,7 @@ def allowed_file(filename):
 
 
 @app.route('/api/upload/', methods=['POST'])
+@cross_origin(origin='*')
 def upload_file():
     if 'file' not in request.files:
         return jsonify({'error': 'No file part'}), 400

@@ -25,7 +25,7 @@ def preprocess_image(img_path, target_size):
     img_array = np.expand_dims(img_array, axis=0)
     return img_array
 
-
+target_size = (64,64)
 def reconized_image(image):
     # Preprocess the image
     img_path = image

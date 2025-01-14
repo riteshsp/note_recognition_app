@@ -29,7 +29,6 @@ target_size = (64, 64)
 
 
 def reconized_image(image):
-    print
     # Preprocess the image
     img_path = image
     preprocessed_image = preprocess_image(img_path, target_size)

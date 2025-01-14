@@ -25,22 +25,17 @@ def preprocess_image(img_path, target_size):
     img_array = np.expand_dims(img_array, axis=0)
     return img_array
 
-target_size = (64, 64)  
-
 
 def reconized_image(image):
     # Preprocess the image
     img_path = image
     preprocessed_image = preprocess_image(img_path, target_size)
-
-
+    
     # Predict the class of the image
     predictions = model.predict(preprocessed_image)
 
-
     # Get the predicted class
     predicted_class = np.argmax(predictions, axis=1)
-
 
     # Print the predicted class
     return dic[str(predicted_class[0])]
